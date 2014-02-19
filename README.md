@@ -1,4 +1,4 @@
 photoshare
 ==========
 
-scripts and stylesheets for photo sharing
+Scripts and stylesheets for photo sharing with browser
