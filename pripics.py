@@ -9,8 +9,6 @@ import csv
 import EXIF
 import Image
 from operator import itemgetter
-sys.path.append('/home/isop/www/photo/')
-sys.path.append('/home/isop/lib/Imaging-1.1.7/PIL/')
 
 thumbnail_size = 200
 
@@ -22,7 +20,7 @@ try:
         raise Exception()
 except:
     print "Initpics make thumbnails and gather properties of pictures in target directory."
-    print "usage : python initpics.py <target directory>"
+    print "usage : python pripics.py <target directory>"
     sys.exit()
 print "target directory is %s" % directory
 
