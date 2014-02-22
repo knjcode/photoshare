@@ -6,6 +6,8 @@ photoshare は写真や画像から簡単にウェブギャラリーを作成す
 画像はサムネイルで画面に一覧表示され、サムネイルをクリックするとlightboxによる
 画像閲覧ができます。
 
+This software is released under the MIT License, see MIT-LICENSE.txt.
+
 ## 使用方法
 
 レポジトリのファイルを自分のWebサーバへコピー
