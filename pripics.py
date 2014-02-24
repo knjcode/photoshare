@@ -65,7 +65,7 @@ for i, infile in enumerate(glob.glob(directory+'*.jpg')):
     # file open
     fp = open(infile)
     exif = EXIF.process_file(fp)
-
+    print exif
 
     # get EXIF datetime
     try:
@@ -85,7 +85,26 @@ for i, infile in enumerate(glob.glob(directory+'*.jpg')):
         tateyoko = "yoko"
     else:
         tateyoko = "tate"
-    csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko))
+
+    #get EXIF Image ISO
+    try:
+        iso = exif['EXIF ISOSpeedRatings']
+    except KeyError:
+        iso = "n/a"
+
+    #get EXIF Image Aperture
+    try:
+        ape = exif['EXIF ApertureValue']
+    except KeyError:
+        ape = "n/a"
+
+    #get EXIF Image Exposure
+    try:
+        exp = exif['EXIF ExposureTime']
+    except KeyError:
+        exp = "n/a" 
+
+    csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko,iso,ape,exp))
 
 csvdata = sorted(csvdata, key=itemgetter(1))
 writer = csv.writer(open(directory+"sort_datetime.csv","wb"))
