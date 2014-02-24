@@ -65,7 +65,6 @@ for i, infile in enumerate(glob.glob(directory+'*.jpg')):
     # file open
     fp = open(infile)
     exif = EXIF.process_file(fp)
-    print exif
 
     # get EXIF datetime
     try:
