@@ -93,7 +93,7 @@ for i, infile in enumerate(glob.glob(directory+'*.jpg')):
 
     #get EXIF Image Aperture
     try:
-        ape = exif['EXIF ApertureValue']
+        ape = exif['EXIF FNumber']
     except KeyError:
         ape = "n/a"
 
