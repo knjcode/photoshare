@@ -85,25 +85,37 @@ for i, infile in enumerate(glob.glob(directory+'*.jpg')):
     else:
         tateyoko = "tate"
 
-    #get EXIF Image ISO
+    #get Image Model
+    try:
+        camera = exif['Image Model']
+    except KeyError:
+        camera = "unknown"
+
+    #get EXIF LensModel
+    try:
+        lens = exif['EXIF LensModel']
+    except KeyError:
+        lens = "unknown"
+
+    #get EXIF ExposureTime
+    try:
+        exp = exif['EXIF ExposureTime']
+    except KeyError:
+        exp = "unknown"
+
+    #get EXIF FNumber
+    try:
+        fnumber = exif['EXIF FNumber']
+    except KeyError:
+        fnumber = "unknown"
+
+    #get EXIF ISOSpeedRatings
     try:
         iso = exif['EXIF ISOSpeedRatings']
     except KeyError:
         iso = "unknown"
 
-    #get EXIF F Number
-    try:
-        fnum = exif['EXIF FNumber']
-    except KeyError:
-        fnum = "unknown"
-
-    #get EXIF Image Exposure
-    try:
-        exp = exif['EXIF ExposureTime']
-    except KeyError:
-        exp = "unknown" 
-
-    csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko,iso,fnum,exp))
+    csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko,camera,lens,exp,fnumber,iso))
 
 csvdata = sorted(csvdata, key=itemgetter(1))
 writer = csv.writer(open(directory+"sort_datetime.csv","wb"))
