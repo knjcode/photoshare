@@ -6,7 +6,7 @@ import glob
 import time
 import datetime
 import csv
-import EXIF
+import exifread
 import Image
 from operator import itemgetter
 
@@ -64,7 +64,7 @@ for i, infile in enumerate(glob.glob(directory+'*.jpg')):
 
     # file open
     fp = open(infile)
-    exif = EXIF.process_file(fp)
+    exif = exifread.process_file(fp)
 
     # get EXIF datetime
     try:
@@ -89,21 +89,21 @@ for i, infile in enumerate(glob.glob(directory+'*.jpg')):
     try:
         iso = exif['EXIF ISOSpeedRatings']
     except KeyError:
-        iso = "n/a"
+        iso = "unknown"
 
-    #get EXIF Image Aperture
+    #get EXIF F Number
     try:
-        ape = exif['EXIF FNumber']
+        fnum = exif['EXIF FNumber']
     except KeyError:
-        ape = "n/a"
+        fnum = "unknown"
 
     #get EXIF Image Exposure
     try:
         exp = exif['EXIF ExposureTime']
     except KeyError:
-        exp = "n/a" 
+        exp = "unknown" 
 
-    csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko,iso,ape,exp))
+    csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko,iso,fnum,exp))
 
 csvdata = sorted(csvdata, key=itemgetter(1))
 writer = csv.writer(open(directory+"sort_datetime.csv","wb"))
