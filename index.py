@@ -40,8 +40,8 @@ print "<div class=\"grid\">"
 for row in reader:
     infile,unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko,iso,ape,exp = row
     print "<div class=\"section%s\">" % tateyoko
-    print "<a href=\"%s\" rel=\"lightbox[group]\">" % infile
-    print "<img src=\"thumbnails/_thumb_%s\" caption=\"%s %s\" width=\"%s\" height=\"%s\">" % (infile,iso,ape,exp,width,height)
+    print "<a href=\"%s\" rel=\"lightbox[group]\" title=\"%s %s %s\">" % (infile,iso,ape,exp)
+    print "<img src=\"thumbnails/_thumb_%s\" width=\"%s\" height=\"%s\">" % (infile,width,height)
     print "<div class=\"title\">%s</div>" % infile
     print "</a></div>"
 
