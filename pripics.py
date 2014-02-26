@@ -9,6 +9,7 @@ import csv
 import exifread
 import Image
 from operator import itemgetter
+from fractions import Fraction
 
 thumbnail_size = 200
 
@@ -105,7 +106,7 @@ for i, infile in enumerate(glob.glob(directory+'*.jpg')):
 
     #get EXIF FNumber
     try:
-        fnumber = exif['EXIF FNumber']
+        fnumber = float(Fraction(str(exif['EXIF FNumber'])))
     except KeyError:
         fnumber = "unknown"
 
