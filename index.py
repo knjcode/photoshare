@@ -30,9 +30,7 @@ print "<link rel=\"stylesheet\" href=\"//photo.guit.net/css/lightbox.css\" />"
 print "<script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js\"></script>"
 print "<script src=\"//photo.guit.net/js/jquery.cookie.js\"></script>"
 print "<script src=\"//photo.guit.net/js/lightbox-2.6.min.js\"></script>"
-print "<script type=\"text/javascript\">"
-print ""
-print "</script>"
+print "<script src=\"//photo.guit.net/js/myscript.js\"></script>"
 print "</head>"
 print "<body>"
 print "<div class=\"grid\">"
@@ -49,6 +47,7 @@ print """
 <ul>
 <li>get COOKIE value: {0}</li>
 </ul>""".format(c_name)
+
 print "</div>"
 print "</body>"
 print "</html>"
