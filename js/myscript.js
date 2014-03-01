@@ -8,5 +8,5 @@ $(document).ready(function(){
             default : $.cookie("sort","unknown");
         }
     });
-
+//    $('p').text($.cookie("sort"));
 });
