@@ -33,6 +33,13 @@ print "<script src=\"//photo.guit.net/js/lightbox-2.6.min.js\"></script>"
 print "<script src=\"//photo.guit.net/js/myscript.js\"></script>"
 print "</head>"
 print "<body>"
+print "<p>set cookie</p>"
+print "<select id=\"sort\" name=\"sort\">"
+print "<option value=\"datetime\">撮影日時昇順</option>"
+print "<option value=\"datetime_reverse\">撮影日時降順</option>"
+print "<option value=\"filedate\">ファイル更新日時昇順</option>"
+print "<option value=\"filedate_reverse\">ファイル更新日時降順</option>"
+print "</select>"
 print "<div class=\"grid\">"
 
 for row in reader:
