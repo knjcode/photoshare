@@ -1,14 +1,4 @@
 $(document).ready(function(){
-    $('a img').hover(
-        function(){
-            $(this).fadeTo("fast",0.6);
-        },
-        function(){
-            $(this).fadeTo("fast",1.0);
-        }
-    );
-    $('p').text($.cookie("sort"));
-
     $('select#sort').change(function(){
         switch ($(this).val()) {
             case "datetime": $.cookie("sort","datetime"); $('p').text($.cookie("sort")); break;
