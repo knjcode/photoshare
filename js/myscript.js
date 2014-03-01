@@ -9,9 +9,8 @@ $(document).ready(function(){
     );
     $('p').text($.cookie("sort"));
 
-    sort = $("#sort");
-    $('#sort').bind('change',function(){
-        switch (sort.val()) {
+    $('select#sort').change(function(){
+        switch ($(this).val()) {
             case "datetime": $.cookie("sort","datetime"); $('p').text($.cookie("sort")); break;
             case "datetime_reverse": $.cookie("sort","datetime_reverse"); $('p').text($.cookie("sort")); break;
             case "filedate": $.cookie("sort","filedate"); $('p').text($.cookie("sort")); break;
