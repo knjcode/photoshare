@@ -7,5 +7,6 @@ $(document).ready(function(){
             case "filedate_reverse": $.cookie("sort","filedate_reverse"); $('p').text($.cookie("sort")); break;
             default : $.cookie("sort","unknown");
         }
+        location.reload();
     });
 });
