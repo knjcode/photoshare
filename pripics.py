@@ -12,52 +12,55 @@ from operator import itemgetter
 from fractions import Fraction
 
 thumbnail_size = 200
+Generated = "thumbnails"
 
 try:
     # using join to get target-directory with a trailing slash.
-    directory = os.path.join(sys.argv[1],"")
-    if not os.path.isdir(directory):
+    input_dir = os.path.join(sys.argv[1],"")
+    if not os.path.isdir(input_dir):
         print "target directory is not exists or not directory.\n"
         raise Exception()
 except:
     print "Initpics make thumbnails and gather properties of pictures in target directory."
     print "usage : python pripics.py <target directory>"
     sys.exit()
-print "target directory is %s" % directory
+print "target directory is %s" % input_dir
+
+# make name of thumbnails directory
+dir = os.path.join(Generated,input_dir)
 
 # make thumbnails directory
-thumbdir = os.path.join(directory,"thumbnails")
-if not os.path.isdir(thumbdir):
+if not os.path.isdir(dir):
     try:
-        os.mkdir(thumbdir)
+        os.makedirs(dir)
     except:
         print "Can't make thumbnails direcotry."
         sys.exit()
-print "thumbnail directory is %s" % thumbdir
+print "thumbnails directory is %s" % dir
 
 
 print "Making thumbnails and gathering properties of pictures."
 csvdata = []
 
 # read file name
-for i, infile in enumerate(glob.glob(directory+'*.jpg')):
+for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
 
     # getmtime
     unixfiledate = os.path.getmtime(infile)
     filedate = time.strftime('%Y:%m:%d %X',time.localtime(unixfiledate))
 
     # convert thumbnail
-    if not os.path.isfile(directory+"thumbnails/_thumb_"+os.path.basename(infile)):
+    if not os.path.isfile(dir+"_thumb_"+os.path.basename(infile)):
         print i+1,": making a thumbnail."
         # read image
         image = Image.open(infile)
         image.thumbnail((thumbnail_size,thumbnail_size), Image.ANTIALIAS)
 
         # save filtered image
-        image.save(directory+"thumbnails/_thumb_"+os.path.basename(infile))
+        image.save(dir+"_thumb_"+os.path.basename(infile))
     else:
         print i+1,": a thumbnail exists."
-        image = Image.open(directory+"thumbnails/_thumb_"+os.path.basename(infile))
+        image = Image.open(dir+"_thumb_"+os.path.basename(infile))
 
 
     width, height = image.size
@@ -119,17 +122,17 @@ for i, infile in enumerate(glob.glob(directory+'*.jpg')):
     csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko,camera,lens,exp,fnumber,iso))
 
 csvdata = sorted(csvdata, key=itemgetter(1))
-writer = csv.writer(open(directory+"sort_datetime.csv","wb"))
+writer = csv.writer(open(dir+"sort_datetime.csv","wb"))
 for row in csvdata: writer.writerow(row)
 
 csvdata = sorted(csvdata, key=itemgetter(1),reverse=True)
-writer = csv.writer(open(directory+"sort_datetime_reverse.csv","wb"))
+writer = csv.writer(open(dir+"sort_datetime_reverse.csv","wb"))
 for row in csvdata: writer.writerow(row)
 
 csvdata = sorted(csvdata, key=itemgetter(3))
-writer = csv.writer(open(directory+"sort_filedate.csv","wb"))
+writer = csv.writer(open(dir+"sort_filedate.csv","wb"))
 for row in csvdata: writer.writerow(row)
 
 csvdata = sorted(csvdata, key=itemgetter(3),reverse=True)
-writer = csv.writer(open(directory+"sort_filedate_reverse.csv","wb"))
+writer = csv.writer(open(dir+"sort_filedate_reverse.csv","wb"))
 for row in csvdata: writer.writerow(row)
