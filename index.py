@@ -13,7 +13,12 @@ expires = datetime.datetime.now() + datetime.timedelta(days=7)
 sort = cookie.get('sort').value if cookie.has_key('sort') else 'datetime'
 
 try:
-    reader = csv.reader(open("sort_datetime.csv"))
+    if   sort == "datetime"         : reader = csv.reader(open("sort_datetime.csv"))
+    elif sort == "datetime_reverse" : reader = csv.reader(open("sort_datetime_reverse.csv"))
+    elif sort == "filedate"         : reader = csv.reader(open("sort_filedate.csv"))
+    elif sort == "filedate_reverse" : reader = csv.reader(open("sort_filedate_reverse.csv"))
+    else : print "CSV load error."
+    exit()
 except IOError:
     print "CSV load error."
     exit()
