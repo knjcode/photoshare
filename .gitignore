@@ -34,3 +34,12 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# Ignore Directories
+
+# Ignore Files
+test/index.py
+*.jpg
+*.JPG
+*.csv
+*.CSV
