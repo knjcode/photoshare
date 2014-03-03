@@ -11,6 +11,8 @@ dir = os.path.basename(os.getcwd())
 cookie = Cookie.SimpleCookie(os.environ.get('HTTP_COOKIE',''))
 expires = datetime.datetime.now() + datetime.timedelta(days=7)
 sort = cookie.get('sort').value if cookie.has_key('sort') else 'datetime'
+selected = {"datetime":"", "datetime_reverse":"", "filedate":"", "filedate_reverse":""}
+selected[sort] = " selected" 
 
 try:
     if   sort == "datetime"         : reader = csv.reader(open("../thumbnails/"+dir+"/sort_datetime.csv"))
@@ -39,13 +41,13 @@ print "<script src=\"//photo.guit.net/js/lightbox-2.6.min.js\"></script>"
 print "<script src=\"//photo.guit.net/js/myscript.js\"></script>"
 print "</head>"
 print "<body>"
-print "<p align=\"right\">画像の並び順"
+print "<div align=\"right\">画像の並び順"
 print "<select id=\"sort\" name=\"sort\">"
-print "<option value=\"datetime\">撮影日時昇順</option>"
-print "<option value=\"datetime_reverse\">撮影日時降順</option>"
-print "<option value=\"filedate\">ファイル更新日時昇順</option>"
-print "<option value=\"filedate_reverse\">ファイル更新日時降順</option>"
-print "</select></p>"
+print "<option value=\"datetime\"%s>撮影日時昇順</option>" % selected["datetime"]
+print "<option value=\"datetime_reverse\"%s>撮影日時降順</option>" % selected["datetime_reverse"]
+print "<option value=\"filedate\"%s>ファイル更新日時昇順</option>" % selected["filedate"]
+print "<option value=\"filedate_reverse\"%s>ファイル更新日時降順</option>" % selected["filedate_reverse"]
+print "</select></div>"
 print "<div class=\"grid\">"
 
 for row in reader:
