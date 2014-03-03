@@ -39,6 +39,7 @@ nosetests.xml
 
 # Ignore Files
 .htaccess
+config.ini
 *.jpg
 *.JPG
 *.csv
