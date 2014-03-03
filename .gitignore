@@ -38,7 +38,7 @@ nosetests.xml
 # Ignore Directories
 
 # Ignore Files
-test/index.py
+.htaccess
 *.jpg
 *.JPG
 *.csv
