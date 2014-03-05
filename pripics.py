@@ -8,11 +8,17 @@ import datetime
 import csv
 import exifread
 import Image
+import ConfigParser
 from operator import itemgetter
 from fractions import Fraction
 
-thumbnail_size = 200
-Generated = "thumbnails"
+# load config
+Config_file = "config.ini"
+conf = ConfigParser.SafeConfigParser()
+conf.read(Config_file)
+ImageHeight = int(conf.get('options','ImageHeight'))
+Generated = conf.get('options','Generated')
+ImageQuality = int(conf.get('options','ImageQuality'))
 
 try:
     # using join to get target-directory with a trailing slash.
@@ -54,16 +60,22 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
         print i+1,": making a thumbnail."
         # read image
         image = Image.open(infile)
-        image.thumbnail((thumbnail_size,thumbnail_size), Image.ANTIALIAS)
+        hpercent = (ImageHeight/float(image.size[1]))
+        print "hpercent is %s" % hpercent
+        wsize = int((float(image.size[0])*float(hpercent)))
+        print "wsize is %s" % wsize
+        image = image.resize((wsize,ImageHeight), Image.ANTIALIAS)
+#        image.thumbnail((thumbnail_size,thumbnail_size), Image.ANTIALIAS)
 
         # save filtered image
-        image.save(dir+"_thumb_"+os.path.basename(infile))
+        image.save(dir+"_thumb_"+os.path.basename(infile),quality=ImageQuality,optimize=True,progressive=True)
     else:
         print i+1,": a thumbnail exists."
         image = Image.open(dir+"_thumb_"+os.path.basename(infile))
 
 
     width, height = image.size
+    print "width, height = %s, %s" % (width,height)
 
 
     # file open
