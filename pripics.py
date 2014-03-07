@@ -55,29 +55,6 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
     unixfiledate = os.path.getmtime(infile)
     filedate = time.strftime('%Y:%m:%d %X',time.localtime(unixfiledate))
 
-    # convert thumbnail
-    if not os.path.isfile(dir+"_thumb_"+os.path.basename(infile)):
-        print i+1,": making a thumbnail."
-        # read image
-        image = Image.open(infile)
-        hpercent = (ImageHeight/float(image.size[1]))
-        print "hpercent is %s" % hpercent
-        wsize = int((float(image.size[0])*float(hpercent)))
-        print "wsize is %s" % wsize
-        image = image.resize((wsize,ImageHeight), Image.ANTIALIAS)
-#        image.thumbnail((thumbnail_size,thumbnail_size), Image.ANTIALIAS)
-
-        # save filtered image
-        image.save(dir+"_thumb_"+os.path.basename(infile),quality=ImageQuality,optimize=True,progressive=True)
-    else:
-        print i+1,": a thumbnail exists."
-        image = Image.open(dir+"_thumb_"+os.path.basename(infile))
-
-
-    width, height = image.size
-    print "width, height = %s, %s" % (width,height)
-
-
     # file open
     fp = open(infile)
     exif = exifread.process_file(fp)
@@ -92,11 +69,11 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
 
     # get EXIF Image Orientation
     try:
-        orientation = exif['Image Orientation']
+        orientation = str(exif['Image Orientation'])
     except KeyError:
         orientation = "Orientation Undefined"
 
-    if width>height:
+    if True:
         tateyoko = "yoko"
     else:
         tateyoko = "tate"
@@ -131,6 +108,43 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
     except KeyError:
         iso = "unknown"
 
+    fp.close()
+
+    # convert thumbnail
+    if not os.path.isfile(dir+"_thumb_"+os.path.basename(infile)):
+        print i+1,": making a thumbnail."
+        # read image
+        image = Image.open(infile)
+
+        # rotate image
+        print orientation
+        if   orientation == "Rotated 90 CW"  : image = image.rotate(90)
+        elif orientation == "Rotated 90 CCW" : image = image.rotate(270)
+        elif orientation == "Rotated 180"    : image = image.rotate(180)
+        elif orientation == "Mirrored horizontal" : image = image.transpose(Image.FLIP_LEFT_RIGHT)
+        elif orientation == "Mirrored vertical"   : image = image.transpose(Image.FLIP_TOP_BOTTOM)
+        elif orientation == "Mirrored horizontal then rotated 90 CCW" : image = image.transpose(Image.FLIP_TOP_BOTTOM).rotate(90)
+        elif orientation == "Mirrored horizontal then rotated 90 CW"  : image = image.transpose(Image.FLIP_TOP_BOTTOM).rotate(270)
+
+        # make thumbnail
+        hpercent = (ImageHeight/float(image.size[1]))
+        print "hpercent is %s" % hpercent
+        wsize = int((float(image.size[0])*float(hpercent)))
+        print "wsize is %s" % wsize
+        image = image.resize((wsize,ImageHeight), Image.ANTIALIAS)
+
+        # save filtered image
+        image.save(dir+"_thumb_"+os.path.basename(infile),quality=ImageQuality,optimize=True,progressive=True)
+    else:
+        print i+1,": a thumbnail exists."
+        image = Image.open(dir+"_thumb_"+os.path.basename(infile))
+
+
+    width, height = image.size
+    print "width, height = %s, %s" % (width,height)
+
+
+    # add Image Information to csvdata
     csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko,camera,lens,exp,fnumber,iso))
 
 csvdata = sorted(csvdata, key=itemgetter(1))
