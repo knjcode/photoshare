@@ -51,8 +51,8 @@ print "</select></div>"
 print "<div class=\"grid\">"
 
 for row in reader:
-    infile,unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko,camera,lens,exp,fnumber,iso = row
-    print "<div class=\"section%s\">" % tateyoko
+    infile,unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,camera,lens,exp,fnumber,iso = row
+    print "<div class=\"section\">"
     print "<a href=\"%s\" rel=\"lightbox[group]\" title=\"%s, %s, %s, F%s, ISO%s, %s\">" % (infile,camera,lens,exp,fnumber,iso,datetime)
     print "<img src=\"../thumbnails/%s/_thumb_%s\" width=\"%s\" height=\"%s\">" % (dir,infile,width,height)
     print "<div class=\"title\">%s</div>" % infile
