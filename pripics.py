@@ -112,7 +112,6 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
         image = Image.open(infile)
 
         # rotate image
-        print orientation
         if   orientation == "Rotated 90 CW"  : image = image.rotate(90)
         elif orientation == "Rotated 90 CCW" : image = image.rotate(270)
         elif orientation == "Rotated 180"    : image = image.rotate(180)
@@ -123,9 +122,7 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
 
         # make thumbnail
         hpercent = (ImageHeight/float(image.size[1]))
-        print "hpercent is %s" % hpercent
         wsize = int((float(image.size[0])*float(hpercent)))
-        print "wsize is %s" % wsize
         image = image.resize((wsize,ImageHeight), Image.ANTIALIAS)
 
         # save filtered image
@@ -134,9 +131,7 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
         print i+1,": a thumbnail exists."
         image = Image.open(dir+"_thumb_"+os.path.basename(infile))
 
-
     width, height = image.size
-    print "width, height = %s, %s" % (width,height)
 
 
     # add Image Information to csvdata
