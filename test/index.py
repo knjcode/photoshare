@@ -34,10 +34,12 @@ print "<meta charset=\"utf-8\">"
 print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
 print "<title>%s</title>" % dir
 print "<link rel=\"stylesheet\" href=\"//photoshare.guit.net/css/grid.css\" />"
-print "<link rel=\"stylesheet\" href=\"//photoshare.guit.net/css/lightbox.css\" />"
+#print "<link rel=\"stylesheet\" href=\"//photoshare.guit.net/css/lightbox.css\" />"
+print "<link rel=\"stylesheet\" href=\"//photoshare.guit.net/css/colorbox.css\" />"
 print "<script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js\"></script>"
 print "<script src=\"//photoshare.guit.net/js/jquery.cookie.js\"></script>"
-print "<script src=\"//photoshare.guit.net/js/lightbox-2.6.min.js\"></script>"
+#print "<script src=\"//photoshare.guit.net/js/lightbox-2.6.min.js\"></script>"
+print "<script src=\"//photoshare.guit.net/js/jquery.colorbox-min.js\"></script>"
 print "<script src=\"//photoshare.guit.net/js/myscript.js\"></script>"
 print "</head>"
 print "<body>"
@@ -53,7 +55,7 @@ print "<div class=\"grid\">"
 for row in reader:
     infile,unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,camera,lens,exp,fnumber,iso = row
     print "<div class=\"section\">"
-    print "<a href=\"%s\" rel=\"lightbox[group]\" title=\"%s, %s, %s, F%s, ISO%s, %s\">" % (infile,camera,lens,exp,fnumber,iso,datetime)
+    print "<a href=\"%s\" rel=\"group\" title=\"%s, %s, %s, F%s, ISO%s, %s\">" % (infile,camera,lens,exp,fnumber,iso,datetime)
     print "<img src=\"../thumbnails/%s/_thumb_%s\" width=\"%s\" height=\"%s\">" % (dir,infile,width,height)
     print "<div class=\"title\">%s</div>" % infile
     print "</a></div>"
