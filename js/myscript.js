@@ -9,4 +9,5 @@ $(document).ready(function(){
         }
         location.reload();
     });
+    $(".grid a").colorbox();
 });
