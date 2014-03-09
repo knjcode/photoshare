@@ -5,15 +5,7 @@ div.grid
   margin-right: auto;
 }
 
-div.grid div.sectionyoko
-{
-  float: left;
-  height: 170px;
-  padding:5px 5px 5px 5px;
-  text-align: center;
-}
-
-div.grid div.sectiontate
+div.grid div.section
 {
   float: left;
   height: 170px;

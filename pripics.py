@@ -73,11 +73,6 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
     except KeyError:
         orientation = "Orientation Undefined"
 
-    if True:
-        tateyoko = "yoko"
-    else:
-        tateyoko = "tate"
-
     #get Image Model
     try:
         camera = exif['Image Model']
@@ -145,7 +140,7 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
 
 
     # add Image Information to csvdata
-    csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,tateyoko,camera,lens,exp,fnumber,iso))
+    csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,camera,lens,exp,fnumber,iso))
 
 csvdata = sorted(csvdata, key=itemgetter(1))
 writer = csv.writer(open(dir+"sort_datetime.csv","wb"))
