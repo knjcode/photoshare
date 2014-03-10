@@ -36,6 +36,7 @@ nosetests.xml
 .pydevproject
 
 # Ignore Directories
+exifread/
 
 # Ignore Files
 .htaccess
@@ -44,3 +45,4 @@ config.ini
 *.JPG
 *.csv
 *.CSV
+test/index.html
