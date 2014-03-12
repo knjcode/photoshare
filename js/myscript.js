@@ -9,5 +9,5 @@ $(document).ready(function(){
         }
         location.reload();
     });
-    $(".grid a").colorbox();
+    $(".grid a").colorbox({width:"80%",height:"80%"});
 });
