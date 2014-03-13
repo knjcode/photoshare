@@ -40,7 +40,7 @@ print "<script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
 print "<script src=\"//photoshare.guit.net/js/jquery.cookie.js\"></script>"
 #print "<script src=\"//photoshare.guit.net/js/lightbox-2.6.min.js\"></script>"
 print "<script src=\"//photoshare.guit.net/js/jQueryRotate.js\"></script>"
-print "<script src=\"//photoshare.guit.net/js/jquery.colorbox.js\"></script>"
+print "<script src=\"//photoshare.guit.net/js/jquery.colorbox-custom.js\"></script>"
 print "<script src=\"//photoshare.guit.net/js/jquery.colorbox-ja.js\"></script>"
 print "<script src=\"//photoshare.guit.net/js/myscript.js\"></script>"
 print "</head>"
