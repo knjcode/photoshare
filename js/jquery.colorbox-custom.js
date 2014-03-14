@@ -197,7 +197,6 @@
 	function makeSettings() {
 		var i,
 			data = $.data(element, colorbox);
-		alert(data);
 		
 		if (data == null) {
 			settings = $.extend({}, defaults);
