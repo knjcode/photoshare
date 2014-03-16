@@ -941,6 +941,7 @@
 			href = retinaUrl(settings, href);
 
 			photo = document.createElement('img');
+			alert('hello');
 
 			$(photo)
 			.addClass(prefix + 'Photo')
