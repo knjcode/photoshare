@@ -375,8 +375,6 @@
 				$box.css({visibility:'hidden', display:'block'});
 				
 				$loaded = $tag(div, 'LoadedContent', 'width:0; height:0; overflow:hidden');
-				//$loaded = $loaded.rotate(90);
-				//alert("rotate");
 				$content.css({width:'', height:''}).append($loaded);
 
 				// Cache values needed for size calculations
@@ -941,6 +939,7 @@
 			href = retinaUrl(settings, href);
 
 			photo = document.createElement('img');
+			$(photo).rotate(90);
 			alert('hello');
 
 			$(photo)
