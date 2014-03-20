@@ -218,6 +218,7 @@
 		settings.title = settings.title || element.title;
 		// get name attribute
 		settings.orientation = settings.name || $(element).attr('name');
+		//alert(settings.orientation);
 		
 		if (typeof settings.href === "string") {
 			settings.href = $.trim(settings.href);
@@ -637,11 +638,6 @@
 		function modalDimensions() {
 			$topBorder[0].style.width = $bottomBorder[0].style.width = $content[0].style.width = (parseInt($box[0].style.width,10) - interfaceWidth)+'px';
 			$content[0].style.height = $leftBorder[0].style.height = $rightBorder[0].style.height = (parseInt($box[0].style.height,10) - interfaceHeight)+'px';
-
-			var tmp = $topBorder[0].style.width;
-			$topBorder[0].style.width = $content[0].style.height;
-			$content[0].style.heigh = tmp;
-
 		}
 
 		css = {width: settings.w + loadedWidth + interfaceWidth, height: settings.h + loadedHeight + interfaceHeight, top: top, left: left};
@@ -786,13 +782,7 @@
 				trigger(event_complete, settings.onComplete);
 			};
 
-			// rotate image
-			switch (settings.orientation) {
-				case "Rotated 90 CW"  : loaded.rotate(270); break;
-				case "Rotated 90 CCW" : $(loaded).rotate(90); break;
-				case "Rotated 180"    : $(loaded).rotate(180); break;
-			}
-
+			
 			$title.html(settings.title).add($loaded).show();
 			
 			if (total > 1) { // handle grouping
@@ -926,11 +916,11 @@
 		}
 		
 		href = settings.href;
-
+		
 		loadingTimer = setTimeout(function () {
 			$loadingOverlay.show();
 		}, 100);
-
+		
 		if (settings.inline) {
 			// Inserts an empty placeholder where inline content is being pulled from.
 			// An event is bound to put inline content back when Colorbox closes or loads new content.
