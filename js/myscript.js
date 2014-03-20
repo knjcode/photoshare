@@ -10,10 +10,7 @@ $(document).ready(function(){
         location.reload();
     });
     $(".grid a").colorbox({
-        maxWidth:"80%",
-        maxHeight:"80%",
-        onComplete: function() {
-            //$("#colorbox").rotate(270);
-        }
+        maxWidth:"90%",
+        maxHeight:"90%"
     });
 });
