@@ -216,9 +216,9 @@
 		settings.rel = settings.rel || element.rel || $(element).data('rel') || 'nofollow';
 		settings.href = settings.href || $(element).attr('href');
 		settings.title = settings.title || element.title;
-		// get name attribute
+		// get name attribute // ##########
 		settings.orientation = settings.name || $(element).attr('name');
-		//alert(settings.orientation);
+		//alert(settings.orientation); // ##########
 		
 		if (typeof settings.href === "string") {
 			settings.href = $.trim(settings.href);
@@ -385,7 +385,10 @@
 				interfaceWidth = $leftBorder.width() + $rightBorder.width() + $content.outerWidth(true) - $content.width();
 				loadedHeight = $loaded.outerHeight(true);
 				loadedWidth = $loaded.outerWidth(true);
-
+//alert("interfaceHeight:"+interfaceHeight);
+//alert("interfaceWidth:"+interfaceWidth);
+//alert("loadedHeight:"+loadedHeight);
+//alert("loadedWidth:"+loadedWidth);
 				// Opens inital empty Colorbox prior to content being loaded.
 				settings.w = setSize(settings.initialWidth, 'x');
 				settings.h = setSize(settings.initialHeight, 'y');
@@ -638,6 +641,8 @@
 		function modalDimensions() {
 			$topBorder[0].style.width = $bottomBorder[0].style.width = $content[0].style.width = (parseInt($box[0].style.width,10) - interfaceWidth)+'px';
 			$content[0].style.height = $leftBorder[0].style.height = $rightBorder[0].style.height = (parseInt($box[0].style.height,10) - interfaceHeight)+'px';
+alert("$content[0].style.width:"+$content[0].style.width);
+alert("$content[0].style.height:"+$content[0].style.height);
 		}
 
 		css = {width: settings.w + loadedWidth + interfaceWidth, height: settings.h + loadedHeight + interfaceHeight, top: top, left: left};
@@ -670,6 +675,10 @@
 				// shrink the wrapper down to exactly the size of colorbox to avoid a bug in IE's iframe implementation.
 				$wrap[0].style.width = (settings.w + loadedWidth + interfaceWidth) + "px";
 				$wrap[0].style.height = (settings.h + loadedHeight + interfaceHeight) + "px";
+				
+				// swap // ##########
+				//a = [b, b = a][0];
+				$wrap[0].style.width = [$wrap[0].style.height, $wrap[0].style.height = $wrap[0].style.width][0];
 				
 				if (settings.reposition) {
 					setTimeout(function () {  // small delay before binding onresize due to an IE8 bug.
@@ -997,11 +1006,25 @@
 				photo.style.width = photo.width + 'px';
 				photo.style.height = photo.height + 'px';
 
+				// swap // ##########
+				//a = [b, b = a][0];
+				//var tmp = photo.width; photo.width = photo.height; photo.height = tmp;
+				//var tmp = photo.style.width; photo.style.width = photo.style.height; photo.style.height = tmp;
+				// end swap size // ##########
+
 				setTimeout(function () { // A pause because Chrome will sometimes report a 0 by 0 size otherwise.
 					prep(photo);
 				}, 1);
 			});
 			
+			// rotate image // ##########
+			switch (settings.orientation) {
+				case "Rotated 90 CCW" :
+					$(photo).rotate(90);
+					break;
+			}
+			// end rotate image // ##########
+
 			setTimeout(function () { // A pause because Opera 10.6+ will sometimes not run the onload function otherwise.
 				photo.src = href;
 			}, 1);
