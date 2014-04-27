@@ -117,8 +117,8 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
         elif orientation == "Rotated 180"    : image = image.rotate(180)
         elif orientation == "Mirrored horizontal" : image = image.transpose(Image.FLIP_LEFT_RIGHT)
         elif orientation == "Mirrored vertical"   : image = image.transpose(Image.FLIP_TOP_BOTTOM)
-        elif orientation == "Mirrored horizontal then rotated 90 CCW" : image = image.transpose(Image.FLIP_TOP_BOTTOM).rotate(90)
-        elif orientation == "Mirrored horizontal then rotated 90 CW"  : image = image.transpose(Image.FLIP_TOP_BOTTOM).rotate(270)
+        elif orientation == "Mirrored horizontal then rotated 90 CCW" : image = image.rotate(90).transpose(Image.FLIP_TOP_BOTTOM)
+        elif orientation == "Mirrored horizontal then rotated 90 CW"  : image = image.rotate(270).transpose(Image.FLIP_TOP_BOTTOM)
 
         # make thumbnail
         hpercent = (ImageHeight/float(image.size[1]))
