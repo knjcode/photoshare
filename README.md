@@ -10,11 +10,11 @@ This software is released under the MIT License, see MIT-LICENSE.txt.
 
 ## 使用方法
 
-1.レポジトリのファイルを自分のWebサーバへコピー
-2.ギャラリーにしたい画像を格納したフォルダをアップロード
-3.そのフォルダ内にtest/index.pyをコピーして配置
-4.フォルダ名を引数に pripics.py を実行
-5.index.pyにアクセスするとフォトギャラリーを閲覧できます。
+1. レポジトリのファイルを自分のWebサーバへコピー
+2. ギャラリーにしたい画像を格納したフォルダをアップロード
+3. そのフォルダ内にtest/index.pyをコピーして配置
+4. フォルダ名を引数に pripics.py を実行
+5. index.pyにアクセスするとフォトギャラリーを閲覧できます。
 
 ## 仕組み
 
