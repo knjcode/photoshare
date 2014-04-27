@@ -15,8 +15,6 @@ if os.environ.has_key('PATH_INFO'):
         dir = path_info[1:2]
         dir = dir[0]
 
-#dir = os.path.basename(os.getcwd())
-
 cookie = Cookie.SimpleCookie(os.environ.get('HTTP_COOKIE',''))
 expires = datetime.datetime.now() + datetime.timedelta(days=7)
 sort = cookie.get('sort').value if cookie.has_key('sort') else 'datetime'
@@ -29,11 +27,9 @@ try:
     elif sort == "filedate"         : reader = csv.reader(open("thumbnails/"+dir+"/sort_filedate.csv"))
     elif sort == "filedate_reverse" : reader = csv.reader(open("thumbnails/"+dir+"/sort_filedate_reverse.csv"))
     else:
-        print "CSV load error. at else"
+        print "Can't open csv file."
         exit()
 except IOError:
-    print "dir="+dir
-    print "thumbnails/"+dir+"/sort_datetime.csv"
     print "CSV load error."
     exit()
 
@@ -42,7 +38,7 @@ print "<!DOCTYPE html>"
 print "<html>"
 print "<head>"
 print "<meta charset=\"utf-8\">"
-print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+#print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
 print "<title>%s</title>" % dir
 print "<link rel=\"stylesheet\" href=\"//photoshare.guit.net/css/grid.css\" />"
 print "<link rel=\"stylesheet\" href=\"//photoshare.guit.net/css/lightbox.css\" />"
