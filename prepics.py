@@ -1,6 +1,7 @@
-#!/usr/local/bin/python
+#!/usr/bin/env python
 
 import os
+import shutil
 import sys
 import glob
 import time
@@ -24,13 +25,13 @@ try:
     # using join to get target-directory with a trailing slash.
     input_dir = os.path.join(sys.argv[1],"")
     if not os.path.isdir(input_dir):
-        print "target directory is not exists or not directory.\n"
+        print "Target directory is not exists or not directory.\n"
         raise Exception()
 except:
-    print "Initpics make thumbnails and gather properties of pictures in target directory."
-    print "usage : python pripics.py <target directory>"
+    print "prepics make thumbnails and gather properties of pictures in target directory."
+    print "usage : python prepics.py <target directory>"
     sys.exit()
-print "target directory is %s" % input_dir
+print "Target directory is %s" % input_dir
 
 # make name of thumbnails directory
 dir = os.path.join(Generated,input_dir)
@@ -40,9 +41,9 @@ if not os.path.isdir(dir):
     try:
         os.makedirs(dir)
     except:
-        print "Can't make thumbnails direcotry."
+        print "Could not make thumbnails direcotry."
         sys.exit()
-print "thumbnails directory is %s" % dir
+print "Thumbnails directory is %s" % dir
 
 
 print "Making thumbnails and gathering properties of pictures."
@@ -73,31 +74,31 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
     except KeyError:
         orientation = "Orientation Undefined"
 
-    #get Image Model
+    # get Image Model
     try:
         camera = exif['Image Model']
     except KeyError:
         camera = "unknown"
 
-    #get EXIF LensModel
+    # get EXIF LensModel
     try:
         lens = exif['EXIF LensModel']
     except KeyError:
         lens = "unknown"
 
-    #get EXIF ExposureTime
+    # get EXIF ExposureTime
     try:
         exp = exif['EXIF ExposureTime']
     except KeyError:
         exp = "unknown"
 
-    #get EXIF FNumber
+    # get EXIF FNumber
     try:
         fnumber = float(Fraction(str(exif['EXIF FNumber'])))
     except KeyError:
         fnumber = "unknown"
 
-    #get EXIF ISOSpeedRatings
+    # get EXIF ISOSpeedRatings
     try:
         iso = exif['EXIF ISOSpeedRatings']
     except KeyError:
@@ -137,18 +138,27 @@ for i, infile in enumerate(glob.glob(input_dir+'*.jpg')):
     # add Image Information to csvdata
     csvdata.append((os.path.basename(infile),unixdatetime,datetime,unixfiledate,filedate,orientation,width,height,camera,lens,exp,fnumber,iso))
 
+# copy index.py to target directory
+shutil.copy("./template.py", input_dir+"index.py")
+print "Copy template.py to target directory as index.py"
+
+# save csvdata sorted by datetime
 csvdata = sorted(csvdata, key=itemgetter(1))
 writer = csv.writer(open(dir+"sort_datetime.csv","wb"))
 for row in csvdata: writer.writerow(row)
 
+# save csvdata sorted by datetime reverse
 csvdata = sorted(csvdata, key=itemgetter(1),reverse=True)
 writer = csv.writer(open(dir+"sort_datetime_reverse.csv","wb"))
 for row in csvdata: writer.writerow(row)
 
+# save csvdata sorted by filedate
 csvdata = sorted(csvdata, key=itemgetter(3))
 writer = csv.writer(open(dir+"sort_filedate.csv","wb"))
 for row in csvdata: writer.writerow(row)
 
+# save csvdata sorted by filedate reverse
 csvdata = sorted(csvdata, key=itemgetter(3),reverse=True)
 writer = csv.writer(open(dir+"sort_filedate_reverse.csv","wb"))
 for row in csvdata: writer.writerow(row)
+

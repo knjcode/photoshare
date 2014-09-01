@@ -37,6 +37,7 @@ nosetests.xml
 
 # Ignore Directories
 exifread/
+test/
 
 # Ignore Files
 .htaccess
@@ -45,4 +46,4 @@ config.ini
 *.JPG
 *.csv
 *.CSV
-test/index.html
+
